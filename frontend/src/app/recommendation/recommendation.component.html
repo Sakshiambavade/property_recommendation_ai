@@ -1,0 +1,29 @@
+<form (ngSubmit)="getRecommendations()" #form="ngForm">
+  <input type="number" placeholder="💰 Budget" [(ngModel)]="user.price" name="price" required />
+  <input type="text" placeholder="📍 Area" [(ngModel)]="user.area" name="area" required />
+
+  <select [(ngModel)]="user.propertyType" name="propertyType">
+    <option>Villa</option>
+    <option>Apartment</option>
+  </select>
+
+  <select [(ngModel)]="user.bhk" name="bhk">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+  </select>
+
+  <button type="submit">🔍 Get Recommendations</button>
+</form>
+
+<div class="cards">
+  <div class="card" *ngFor="let p of recommendations">
+    <h3>{{ p.name }}</h3>
+    <p><b>🏠 Type:</b> {{ p.propertyType }}</p>
+    <p><b>📦 Inventory:</b> {{ p.inventoryType }}</p>
+    <p><b>📍 Area:</b> {{ p.area }}</p>
+    <p><b>💰 Price:</b> ₹{{ p.price | number }}</p>
+    <p><b>🛏️ BHK:</b> {{ p.bhk }} BHK</p>
+    <p><span class="badge">{{ p.predicted_score | number:'1.0-0' }}% Match</span></p>
+  </div>
+</div>
